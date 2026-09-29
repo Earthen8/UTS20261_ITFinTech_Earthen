@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
+import { useCallback, useMemo, useSyncExternalStore } from 'react';
 import { getProductById, type Product } from '../lib/products';
 
 const STORAGE_KEY = 'payment-gateway:cart:v1';
@@ -74,8 +74,11 @@ export function useCart() {
     const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
     // `ready` flips after hydration so pages can avoid flashing an empty-cart state.
-    const [ready, setReady] = useState(false);
-    useEffect(() => setReady(true), []);
+    const ready = useSyncExternalStore(
+        () => () => {},
+        () => true,
+        () => false,
+    );
 
     const lines: CartLine[] = useMemo(
         () =>

@@ -1,0 +1,12 @@
+{
+  "name": "uts20261-itfintech-earthen",
+  "version": "1.0.0",
+  "private": true,
+  "description": "UTS IT Financial Services - Payment Gateway Project",
+  "scripts": {
+    "dev": "npm --prefix WEB_PaymentGateway run dev",
+    "build": "npm --prefix WEB_PaymentGateway run build",
+    "start": "npm --prefix WEB_PaymentGateway run start",
+    "lint": "npm --prefix WEB_PaymentGateway run lint"
+  }
+}

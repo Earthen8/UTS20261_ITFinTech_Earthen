@@ -82,7 +82,7 @@ export default function PaymentPage() {
       setStatus('success');
       clear();
       if (result.invoiceUrl) {
-        window.location.href = result.invoiceUrl;
+        window.location.assign(result.invoiceUrl);
       }
     } catch {
       setStatus('error');
