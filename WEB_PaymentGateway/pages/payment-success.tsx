@@ -1,12 +1,19 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import MobileFrame from '../components/layout/MobileFrame';
 import BackHeader from '../components/layout/BackHeader';
+import { useCart } from '../hooks/useCart';
 
 export default function PaymentSuccess() {
   const router = useRouter();
   const { order_id } = router.query;
+  const { clear } = useCart();
+
+  useEffect(() => {
+    clear();
+  }, [clear]);
 
   return (
     <>

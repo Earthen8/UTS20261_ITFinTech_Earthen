@@ -33,7 +33,7 @@ function validate(values: ShippingAddress): FieldErrors {
 }
 
 export default function PaymentPage() {
-  const { ready, lines, subtotal } = useCart();
+  const { ready, lines, subtotal, clear } = useCart();
 
   const [shipping, setShipping] = useState<ShippingAddress>({ fullName: '', address: '', phone: '' });
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -80,6 +80,7 @@ export default function PaymentPage() {
       });
       setReference(result.reference);
       setStatus('success');
+      clear();
       if (result.invoiceUrl) {
         window.location.href = result.invoiceUrl;
       }
