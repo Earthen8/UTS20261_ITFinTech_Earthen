@@ -13,7 +13,7 @@ export default function ProductThumb({ emoji = '📦', size = 'md', className = 
 
   return (
     <div
-      className={`flex shrink-0 items-center justify-center rounded-xl bg-gray-100 ${sizeClasses[size] || sizeClasses.md} ${className}`}
+      className={`flex shrink-0 items-center justify-center rounded-2xl bg-violet-50 ${sizeClasses[size] || sizeClasses.md} ${className}`}
       aria-hidden="true"
     >
       <span>{emoji}</span>

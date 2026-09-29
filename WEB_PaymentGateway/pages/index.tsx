@@ -45,21 +45,21 @@ export default function SelectItemPage() {
               <button
                 type="button"
                 aria-label="Open menu"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-gray-700 transition hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-gray-600 transition hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
               >
                 <MenuIcon />
               </button>
-              <span className="text-lg font-bold tracking-tight text-gray-900">Logo</span>
+              <span className="text-lg font-bold tracking-tight text-gray-900">PayGate</span>
             </div>
 
             <Link
               href="/checkout"
               aria-label={`Go to cart, ${cartCount} item${cartCount === 1 ? '' : 's'}`}
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-800 transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
             >
               <CartIcon className="h-6 w-6" />
               {cartCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-600 px-1 text-[11px] font-semibold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-violet-600 px-1 text-[11px] font-bold text-white">
                   {cartCount}
                 </span>
               )}
@@ -80,7 +80,7 @@ export default function SelectItemPage() {
             ))}
           </ul>
         ) : (
-          <p className="px-5 py-16 text-center text-sm text-gray-500">
+          <p className="px-5 py-16 text-center text-sm text-gray-400">
             No products found. Try a different search or category.
           </p>
         )}

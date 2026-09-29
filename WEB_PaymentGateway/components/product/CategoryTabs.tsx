@@ -10,7 +10,7 @@ export default function CategoryTabs({ active, onChange }: CategoryTabsProps) {
         <div
             role="tablist"
             aria-label="Product categories"
-            className="flex overflow-x-auto border-b border-gray-200 px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex overflow-x-auto border-b border-gray-100 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
             {CATEGORIES.map((category) => {
                 const isActive = category === active;
@@ -21,9 +21,9 @@ export default function CategoryTabs({ active, onChange }: CategoryTabsProps) {
                         role="tab"
                         aria-selected={isActive}
                         onClick={() => onChange(category)}
-                        className={`-mb-px shrink-0 border-b-2 px-3 py-3 text-sm font-medium transition focus:outline-none focus-visible:bg-gray-50 ${isActive
-                            ? 'border-indigo-600 text-gray-900'
-                            : 'border-transparent text-gray-500 hover:text-gray-800'
+                        className={`-mb-px shrink-0 border-b-2 px-4 py-3 text-sm font-medium transition-colors focus:outline-none focus-visible:bg-gray-50 ${isActive
+                            ? 'border-violet-600 text-violet-700'
+                            : 'border-transparent text-gray-400 hover:text-gray-700'
                             }`}
                     >
                         {category}

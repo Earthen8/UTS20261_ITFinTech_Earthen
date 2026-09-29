@@ -1,14 +1,14 @@
 # UTS IT Financial Services (Ganjil 2026/2027)
 **Nama:** Earthen  
 **Mata Kuliah:** IT Financial Services  
-**Program Studi:** S1 IT & FinTech, Universitas Prasetiya Mulya  
+**Program Studi:** S1 Digital Business Technology (Software Engineering)
 **Dosen Pengampu:** Permata Nur M.R., Ph.D. (`permata.nmr@prasetiyamulya.ac.id`)  
 **Repository:** `UTS20261_ITFinTech_Earthen`
 
 ---
 
 ## 📌 Deskripsi Project
-Aplikasi **Payment Gateway Integration** berbasis Web yang mengintegrasikan alur checkout e-commerce sederhana dengan **Payment Gateway Xendit** dan database **MongoDB Atlas**. Dibangun menggunakan framework **Next.js (Page Router)**, antarmuka dirancang persis sesuai spesifikasi wireframe pada lembar soal UTS.
+Aplikasi **Payment Gateway Integration** berbasis Web yang mengintegrasikan alur checkout e-commerce sederhana dengan **Payment Gateway Xendit** dan database **MongoDB Atlas**. Dibangun menggunakan framework **Next.js (Page Router)**.
 
 ### 🌟 Fitur Utama
 1. **Page 1 - Select Items (`/`)**:

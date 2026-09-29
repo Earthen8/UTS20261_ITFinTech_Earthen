@@ -38,7 +38,7 @@ export default function CheckoutPage() {
               {lines.map(({ product, quantity, lineTotal }) => (
                 <li
                   key={product.id}
-                  className="flex items-center gap-4 border-b border-gray-200 px-5 py-4"
+                  className="flex items-center gap-4 border-b border-gray-100 px-5 py-4"
                 >
                   <ProductThumb emoji={product.emoji} size="md" />
                   <div className="min-w-0 flex-1 space-y-2">
@@ -49,7 +49,7 @@ export default function CheckoutPage() {
                       onChange={(next) => setQuantity(product.id, next)}
                     />
                   </div>
-                  <p className="shrink-0 text-sm font-semibold text-gray-900">
+                  <p className="shrink-0 text-sm font-bold text-gray-900">
                     {formatCurrency(lineTotal)}
                   </p>
                 </li>
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
             </ul>
 
             {/* 3. Cost breakdown */}
-            <dl className="space-y-2 px-5 py-5">
+            <dl className="space-y-3 rounded-xl bg-gray-50 px-5 py-5 mx-5 my-4">
               <PriceRow label="Subtotal" value={formatCurrency(totals.subtotal)} />
               <PriceRow
                 label={`Tax (${Math.round(TAX_RATE * 100)}%)`}
@@ -70,7 +70,7 @@ export default function CheckoutPage() {
             <div className="px-5 pb-6">
               <Link
                 href="/payment"
-                className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-50 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
               >
                 Continue to Payment <ArrowRightIcon className="h-4 w-4" />
               </Link>

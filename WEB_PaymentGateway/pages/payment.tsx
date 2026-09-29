@@ -90,9 +90,9 @@ export default function PaymentPage() {
   };
 
   const inputClass = (hasError: boolean) =>
-    `w-full rounded-lg border bg-white px-3 py-2.5 text-sm text-gray-800 placeholder-gray-400 outline-none transition focus:ring-2 ${hasError
-      ? 'border-red-400 focus:border-red-500 focus:ring-red-100'
-      : 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-100'
+    `w-full rounded-xl border bg-gray-50 px-3.5 py-2.5 text-sm text-gray-800 placeholder-gray-400 outline-none transition focus:bg-white focus:ring-2 ${hasError
+      ? 'border-red-300 focus:border-red-400 focus:ring-red-100'
+      : 'border-gray-200 focus:border-violet-400 focus:ring-violet-100'
     }`;
 
   const busy = status === 'submitting';
@@ -117,8 +117,8 @@ export default function PaymentPage() {
           <form onSubmit={handleSubmit} noValidate className="flex flex-1 flex-col">
             <div className="flex-1 space-y-6 px-5 py-5">
               {/* 2. Shipping address */}
-              <fieldset className="space-y-3" disabled={busy || done}>
-                <legend className="mb-3 text-sm font-semibold text-gray-900">Shipping Address</legend>
+              <fieldset className="space-y-3 rounded-xl bg-gray-50 p-4" disabled={busy || done}>
+                <legend className="mb-1 px-0.5 text-sm font-semibold text-gray-800">Shipping Address</legend>
 
                 <div>
                   <label htmlFor="fullName" className="mb-1 block text-xs font-medium text-gray-600">
@@ -182,13 +182,13 @@ export default function PaymentPage() {
               </fieldset>
 
               {/* 3. Payment method */}
-              <fieldset disabled={busy || done}>
-                <legend className="mb-3 text-sm font-semibold text-gray-900">Payment Method</legend>
+              <fieldset className="rounded-xl bg-gray-50 p-4" disabled={busy || done}>
+                <legend className="mb-3 text-sm font-semibold text-gray-800">Payment Method</legend>
                 <div className="space-y-1">
                   {PAYMENT_METHODS.map((option) => (
                     <label
                       key={option.value}
-                      className="flex cursor-pointer items-start gap-3 rounded-lg px-1 py-2 text-sm text-gray-800 hover:bg-gray-50"
+                      className={`flex cursor-pointer items-start gap-3 rounded-xl px-2 py-2.5 text-sm transition-colors ${method === option.value ? 'bg-violet-50 text-violet-800' : 'text-gray-700 hover:bg-white'}`}
                     >
                       <input
                         type="radio"
@@ -196,7 +196,7 @@ export default function PaymentPage() {
                         value={option.value}
                         checked={method === option.value}
                         onChange={() => setMethod(option.value)}
-                        className="mt-0.5 h-4 w-4 shrink-0 accent-indigo-600"
+                        className="mt-0.5 h-4 w-4 shrink-0 accent-violet-600"
                       />
                       <span>{option.label}</span>
                     </label>
@@ -205,8 +205,8 @@ export default function PaymentPage() {
               </fieldset>
 
               {/* 4. Order summary */}
-              <section aria-labelledby="order-summary-title">
-                <h2 id="order-summary-title" className="mb-3 text-sm font-semibold text-gray-900">
+              <section aria-labelledby="order-summary-title" className="rounded-xl bg-gray-50 p-4">
+                <h2 id="order-summary-title" className="mb-3 text-sm font-semibold text-gray-800">
                   Order Summary
                 </h2>
                 <dl className="space-y-2">
@@ -235,7 +235,7 @@ export default function PaymentPage() {
               <button
                 type="submit"
                 disabled={busy || done}
-                className="w-full rounded-xl bg-gray-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-gray-900 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                className="w-full rounded-xl bg-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
               >
                 {busy ? 'Processing…' : done ? 'Order Confirmed' : 'Confirm & Pay'}
               </button>

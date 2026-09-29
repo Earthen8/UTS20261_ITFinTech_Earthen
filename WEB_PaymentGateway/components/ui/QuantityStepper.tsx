@@ -8,17 +8,17 @@ interface QuantityStepperProps {
 
 export default function QuantityStepper({ value, productName, onChange }: QuantityStepperProps) {
     const button =
-        'flex h-8 w-8 items-center justify-center text-gray-600 transition hover:bg-gray-100 active:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500';
+        'flex h-8 w-8 items-center justify-center text-gray-500 transition hover:bg-violet-50 hover:text-violet-700 active:bg-violet-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400';
 
     return (
-        <div className="inline-flex items-center overflow-hidden rounded-lg border border-gray-300 bg-white">
+        <div className="inline-flex items-center overflow-hidden rounded-xl border border-gray-200 bg-white">
             <button
                 type="button"
                 className={button}
                 aria-label={value <= 1 ? `Remove ${productName}` : `Decrease quantity of ${productName}`}
                 onClick={() => onChange(value - 1)}
             >
-                <MinusIcon className="h-4 w-4" />
+                <MinusIcon className="h-3.5 w-3.5" />
             </button>
             <span
                 className="w-9 select-none text-center text-sm font-semibold text-gray-800"
@@ -33,7 +33,7 @@ export default function QuantityStepper({ value, productName, onChange }: Quanti
                 aria-label={`Increase quantity of ${productName}`}
                 onClick={() => onChange(value + 1)}
             >
-                <PlusIcon className="h-4 w-4" />
+                <PlusIcon className="h-3.5 w-3.5" />
             </button>
         </div>
     );
