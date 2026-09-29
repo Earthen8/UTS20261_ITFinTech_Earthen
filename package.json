@@ -4,6 +4,7 @@
   "private": true,
   "description": "UTS IT Financial Services - Payment Gateway Project",
   "scripts": {
+    "postinstall": "npm --prefix WEB_PaymentGateway install",
     "dev": "npm --prefix WEB_PaymentGateway run dev",
     "build": "npm --prefix WEB_PaymentGateway run build",
     "start": "npm --prefix WEB_PaymentGateway run start",
