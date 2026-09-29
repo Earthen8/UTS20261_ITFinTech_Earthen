@@ -1,6 +1,33 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
+import MobileFrame from '../components/layout/MobileFrame';
+import SearchBar from '../components/product/SearchBar';
+import CategoryTabs from '../components/product/CategoryTabs';
+import ProductCard from '../components/product/ProductCard';
+import { CartIcon, MenuIcon } from '../components/ui/Icons';
+import { useCart } from '../hooks/useCart';
+import { PRODUCTS, type Category } from '../lib/products';
 
 export default function SelectItemPage() {
+  const { addItem, totalQuantity, ready } = useCart();
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState<Category>('All');
+
+  const visibleProducts = useMemo(() => {
+    const keyword = query.trim().toLowerCase();
+    return PRODUCTS.filter((p) => {
+      const matchesCategory = category === 'All' || p.category === category;
+      const matchesQuery =
+        !keyword ||
+        p.name.toLowerCase().includes(keyword) ||
+        p.description.toLowerCase().includes(keyword);
+      return matchesCategory && matchesQuery;
+    });
+  }, [query, category]);
+
+  const cartCount = ready ? totalQuantity : 0;
+
   return (
     <>
       <Head>
@@ -8,21 +35,56 @@ export default function SelectItemPage() {
         <meta name="description" content="Select items and products" />
       </Head>
 
-      <main className="min-h-screen bg-gray-100 flex justify-center py-8 px-4">
-        {/* Container Utama (Frame Mobile / Responsive) */}
-        <div className="w-full max-w-md bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col">
-          <h1 className="text-xl font-bold text-gray-800 mb-4">Select Items</h1>
+      <MobileFrame>
+        <h1 className="sr-only">Select Items</h1>
 
-          {/* TODO: Implementasikan tampilan Select Item sesuai wireframe:
-              1. Header (Logo & Search bar)
-              2. Kategori filter (All, Drinks, Snacks, Bundles)
-              3. Grid produk (Nama, Harga, Deskripsi singkat, tombol Add +)
-          */}
-          <div className="flex-1 flex items-center justify-center border-2 border-dashed border-gray-200 rounded-lg p-6 text-center text-gray-400">
-            Placeholder: Implementasikan UI Select Item di sini
+        {/* 1. Header: menu, logo, cart + search */}
+        <header className="space-y-4 px-5 pb-4 pt-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                aria-label="Open menu"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-gray-700 transition hover:bg-gray-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+              >
+                <MenuIcon />
+              </button>
+              <span className="text-lg font-bold tracking-tight text-gray-900">Logo</span>
+            </div>
+
+            <Link
+              href="/checkout"
+              aria-label={`Go to cart, ${cartCount} item${cartCount === 1 ? '' : 's'}`}
+              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-800 transition hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+            >
+              <CartIcon className="h-6 w-6" />
+              {cartCount > 0 && (
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-indigo-600 px-1 text-[11px] font-semibold text-white">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
           </div>
-        </div>
-      </main>
+
+          <SearchBar value={query} onChange={setQuery} />
+        </header>
+
+        {/* 2. Category filter */}
+        <CategoryTabs active={category} onChange={setCategory} />
+
+        {/* 3. Product list */}
+        {visibleProducts.length > 0 ? (
+          <ul>
+            {visibleProducts.map((product) => (
+              <ProductCard key={product.id} product={product} onAdd={addItem} />
+            ))}
+          </ul>
+        ) : (
+          <p className="px-5 py-16 text-center text-sm text-gray-500">
+            No products found. Try a different search or category.
+          </p>
+        )}
+      </MobileFrame>
     </>
   );
 }
