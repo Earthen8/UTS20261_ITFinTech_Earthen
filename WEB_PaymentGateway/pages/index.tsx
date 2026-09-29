@@ -49,7 +49,14 @@ export default function SelectItemPage() {
               >
                 <MenuIcon />
               </button>
-              <span className="text-lg font-bold tracking-tight text-gray-900">PayGate</span>
+              <div className="flex items-center gap-2">
+                <img
+                  src="/eks-logo.png"
+                  alt="EKS Logo"
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="text-lg font-bold tracking-tight text-black">EKS</span>
+              </div>
             </div>
 
             <Link
