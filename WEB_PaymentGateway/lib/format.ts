@@ -1,8 +1,8 @@
-export function formatCurrency(amount: number): string {
+/** 28000 -> "Rp 28.000" */
+export function formatCurrency(value: number): string {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
-    minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(amount);
+  }).format(value).replace(/\u00a0/g, ' ');
 }
