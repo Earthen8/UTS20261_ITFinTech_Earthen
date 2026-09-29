@@ -19,16 +19,25 @@ export interface PaymentRequest {
 
 export interface PaymentResponse {
     reference: string;
+    invoiceUrl: string;
 }
 
 /**
  * Single integration point for "Confirm & Pay".
- *
- * TODO (next tasks): replace this stub with a POST to your API route
- * (e.g. /api/payment/create) that saves Checkout/Payment in MongoDB and
- * creates a Xendit invoice, then redirect to the returned invoice URL.
  */
-export async function createPayment(_request: PaymentRequest): Promise<PaymentResponse> {
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    return { reference: `ORD-${Date.now().toString(36).toUpperCase()}` };
+export async function createPayment(request: PaymentRequest): Promise<PaymentResponse> {
+    const res = await fetch('/api/payment/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(request),
+    });
+
+    if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || 'Failed to create payment');
+    }
+
+    return res.json();
 }

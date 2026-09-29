@@ -80,6 +80,9 @@ export default function PaymentPage() {
       });
       setReference(result.reference);
       setStatus('success');
+      if (result.invoiceUrl) {
+        window.location.href = result.invoiceUrl;
+      }
     } catch {
       setStatus('error');
     }
