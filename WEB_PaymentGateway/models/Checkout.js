@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 const CheckoutItemSchema = new mongoose.Schema({
   productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
+    type: String,
     required: true,
   },
   name: {
