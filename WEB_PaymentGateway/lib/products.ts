@@ -38,7 +38,7 @@ export const PRODUCTS: Product[] = [
         id: 'snk-001', name: 'Butter Croissant', price: 22000,
         description: 'Flaky, baked fresh every morning.',
         category: 'Snacks', emoji: '🥐',
-        imageUrl: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=400&h=400&fit=crop&q=80',
+        imageUrl: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400&h=400&fit=crop&q=80',
     },
     {
         id: 'snk-002', name: 'Truffle Fries', price: 30000,

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface ProductThumbProps {
   imageUrl?: string;
   emoji?: string;
@@ -11,6 +13,8 @@ export default function ProductThumb({
   size = 'md',
   className = '',
 }: ProductThumbProps) {
+  const [hasError, setHasError] = useState(false);
+
   const sizeClasses = {
     sm: 'h-11 w-11',
     md: 'h-16 w-16',
@@ -23,7 +27,7 @@ export default function ProductThumb({
     lg: 'text-4xl',
   };
 
-  if (imageUrl) {
+  if (imageUrl && !hasError) {
     return (
       <div
         className={`shrink-0 overflow-hidden rounded-2xl ${sizeClasses[size]} ${className}`}
@@ -33,6 +37,7 @@ export default function ProductThumb({
           alt=""
           className="h-full w-full object-cover"
           loading="lazy"
+          onError={() => setHasError(true)}
         />
       </div>
     );
