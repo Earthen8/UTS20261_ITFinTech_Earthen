@@ -48,6 +48,18 @@ export default async function handler(req, res) {
     const successRedirectUrl = `${baseUrl}/payment-success?order_id=${externalId}`;
     const failureRedirectUrl = `${baseUrl}/payment-failed?order_id=${externalId}`;
 
+    // Map frontend payment method to Xendit allowed payment channels
+    const methodChannelMap = {
+      qris: ['QRIS'],
+      gopay: ['GOPAY'],
+      shopeepay: ['SHOPEEPAY'],
+      bca_va: ['BCA'],
+      mandiri_va: ['MANDIRI'],
+      credit_card: ['CREDIT_CARD'],
+    };
+
+    const allowedPaymentMethods = methodChannelMap[method] || undefined;
+
     const invoiceData = {
       externalId: externalId,
       amount: grandTotal,
@@ -62,6 +74,7 @@ export default async function handler(req, res) {
           }
         ]
       },
+      paymentMethods: allowedPaymentMethods,
       successRedirectUrl,
       failureRedirectUrl,
       currency: 'IDR',
