@@ -6,20 +6,18 @@ interface BackHeaderProps {
     backHref: string;
 }
 
-/** "< Back   Title" bar used by Checkout and Payment. */
+/** Sticky "< Back   Title" header bar used by Checkout, Payment, and Status pages. */
 export default function BackHeader({ title, backHref }: BackHeaderProps) {
     return (
-        <header className="relative flex items-center border-b border-gray-100 bg-white px-4 py-4">
+        <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-gray-100 bg-white/95 px-5 py-3.5 backdrop-blur-md">
             <Link
                 href={backHref}
-                className="z-10 -ml-1 inline-flex items-center gap-0.5 rounded-lg px-2 py-1.5 text-sm font-medium text-gray-500 transition hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+                aria-label="Back"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-gray-700 transition hover:bg-gray-200 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
             >
-                <ChevronLeftIcon className="h-4 w-4" />
-                Back
+                <ChevronLeftIcon className="h-5 w-5" />
             </Link>
-            <h1 className="pointer-events-none absolute inset-x-0 text-center text-base font-semibold text-gray-900">
-                {title}
-            </h1>
+            <h1 className="text-lg font-bold tracking-tight text-gray-900">{title}</h1>
         </header>
     );
 }

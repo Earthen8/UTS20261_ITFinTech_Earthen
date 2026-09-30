@@ -68,7 +68,7 @@ export default function SelectItemPage() {
         <h1 className="sr-only">Select Items</h1>
 
         {/* 1. Header: menu, logo, cart + search */}
-        <header className="space-y-4 px-5 pb-4 pt-5">
+        <header className="sticky top-0 z-20 space-y-3.5 border-b border-gray-100 bg-white/95 px-5 pb-3.5 pt-4 backdrop-blur-md">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button
