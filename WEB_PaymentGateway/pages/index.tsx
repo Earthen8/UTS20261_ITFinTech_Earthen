@@ -1,18 +1,47 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import MobileFrame from '../components/layout/MobileFrame';
 import SearchBar from '../components/product/SearchBar';
 import CategoryTabs from '../components/product/CategoryTabs';
 import ProductCard from '../components/product/ProductCard';
+import CartToast from '../components/ui/CartToast';
 import { CartIcon, MenuIcon } from '../components/ui/Icons';
 import { useCart } from '../hooks/useCart';
-import { PRODUCTS, type Category } from '../lib/products';
+import { PRODUCTS, type Category, type Product } from '../lib/products';
 
 export default function SelectItemPage() {
   const { addItem, totalQuantity, ready } = useCart();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<Category>('All');
+  const [toastProduct, setToastProduct] = useState<Product | null>(null);
+  const [isToastVisible, setIsToastVisible] = useState(false);
+  const toastTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleAddToCart = useCallback((productId: string) => {
+    addItem(productId);
+    const product = PRODUCTS.find((p) => p.id === productId);
+    if (!product) return;
+
+    if (toastTimerRef.current) {
+      clearTimeout(toastTimerRef.current);
+    }
+
+    setToastProduct(product);
+    setIsToastVisible(true);
+
+    toastTimerRef.current = setTimeout(() => {
+      setIsToastVisible(false);
+    }, 2800);
+  }, [addItem]);
+
+  useEffect(() => {
+    return () => {
+      if (toastTimerRef.current) {
+        clearTimeout(toastTimerRef.current);
+      }
+    };
+  }, []);
 
   const visibleProducts = useMemo(() => {
     const keyword = query.trim().toLowerCase();
@@ -83,7 +112,11 @@ export default function SelectItemPage() {
         {visibleProducts.length > 0 ? (
           <ul>
             {visibleProducts.map((product) => (
-              <ProductCard key={product.id} product={product} onAdd={addItem} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAdd={handleAddToCart}
+              />
             ))}
           </ul>
         ) : (
@@ -91,6 +124,8 @@ export default function SelectItemPage() {
             No products found. Try a different search or category.
           </p>
         )}
+
+        <CartToast product={toastProduct} isVisible={isToastVisible} />
       </MobileFrame>
     </>
   );
