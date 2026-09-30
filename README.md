@@ -1,9 +1,9 @@
 # UTS IT Financial Services (Ganjil 2026/2027)
-**Nama:** Earthen Krisdian Setya
-**Mata Kuliah:** IT Financial Services  
-**Program Studi:** S1 Digital Business Technology (Software Engineering)
-**Dosen Pengampu:** Permata Nur M.R., Ph.D. (`permata.nmr@prasetiyamulya.ac.id`)  
-**Repository:** `UTS20261_ITFinTech_Earthen`
+- **Nama:** Earthen Krisdian Setya
+- **Mata Kuliah:** IT Financial Services
+- **Program Studi:** S1 Digital Business Technology (Software Engineering)
+- **Dosen Pengampu:** Permata Nur M.R., Ph.D. (`permata.nmr@prasetiyamulya.ac.id`)
+- **Repository:** `UTS20261_ITFinTech_Earthen`
 
 ---
 
