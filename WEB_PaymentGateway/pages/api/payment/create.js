@@ -43,8 +43,12 @@ export default async function handler(req, res) {
     // Generate externalId
     const externalId = `ORD-${checkout._id}`;
 
-    // Create Xendit Invoice
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    // Determine baseUrl dynamically (supports localhost, ngrok, and Vercel automatically)
+    const protocol = req.headers['x-forwarded-proto'] || 'http';
+    const host = req.headers['host'];
+    const detectedBaseUrl = host ? `${protocol}://${host}` : 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || detectedBaseUrl;
+
     const successRedirectUrl = `${baseUrl}/payment-success?order_id=${externalId}`;
     const failureRedirectUrl = `${baseUrl}/payment-failed?order_id=${externalId}`;
 
