@@ -19,8 +19,8 @@ export default function CheckoutPage() {
   return (
     <>
       <Head>
-        <title>Checkout | Payment Gateway</title>
-        <meta name="description" content="Checkout and order summary" />
+        <title>Checkout | EKS Payment Gateway</title>
+        <meta name="description" content="Review your cart and checkout" />
       </Head>
 
       <MobileFrame>
@@ -38,18 +38,18 @@ export default function CheckoutPage() {
               {lines.map(({ product, quantity, lineTotal }) => (
                 <li
                   key={product.id}
-                  className="flex items-center gap-4 border-b border-gray-100 px-5 py-4"
+                  className="flex items-center gap-4 border-b border-[#e4ddd3]/60 px-5 py-4"
                 >
-                  <ProductThumb emoji={product.emoji} size="md" />
+                  <ProductThumb imageUrl={product.imageUrl} emoji={product.emoji} size="md" />
                   <div className="min-w-0 flex-1 space-y-2">
-                    <p className="truncate text-sm font-semibold text-gray-900">{product.name}</p>
+                    <p className="truncate text-sm font-semibold text-[#2e261c]">{product.name}</p>
                     <QuantityStepper
                       value={quantity}
                       productName={product.name}
                       onChange={(next) => setQuantity(product.id, next)}
                     />
                   </div>
-                  <p className="shrink-0 text-sm font-bold text-gray-900">
+                  <p className="shrink-0 text-sm font-bold text-[#1b4332]">
                     {formatCurrency(lineTotal)}
                   </p>
                 </li>
@@ -57,7 +57,7 @@ export default function CheckoutPage() {
             </ul>
 
             {/* 3. Cost breakdown */}
-            <dl className="space-y-3 rounded-xl bg-gray-50 px-5 py-5 mx-5 my-4">
+            <dl className="space-y-3 rounded-2xl bg-[#f0ebe4]/60 px-5 py-5 mx-5 my-4 border border-[#e4ddd3]/50">
               <PriceRow label="Subtotal" value={formatCurrency(totals.subtotal)} />
               <PriceRow
                 label={`Tax (${Math.round(TAX_RATE * 100)}%)`}
@@ -70,7 +70,7 @@ export default function CheckoutPage() {
             <div className="px-5 pb-6">
               <Link
                 href="/payment"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1b4332] px-4 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2d6a4f] active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6a4f] focus-visible:ring-offset-2"
               >
                 Continue to Payment <ArrowRightIcon className="h-4 w-4" />
               </Link>

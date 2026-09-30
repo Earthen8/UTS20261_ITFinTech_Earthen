@@ -11,7 +11,7 @@ export default function PaymentFailed() {
   return (
     <>
       <Head>
-        <title>Payment Failed | Payment Gateway</title>
+        <title>Payment Failed | EKS Payment Gateway</title>
       </Head>
       <MobileFrame>
         <BackHeader title="Failed" backHref="/" />
@@ -21,17 +21,17 @@ export default function PaymentFailed() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h2 className="mb-2 text-2xl font-bold text-gray-900">Payment Failed</h2>
-          <p className="mb-1 text-sm text-gray-500">Order ID</p>
-          <p className="mb-8 rounded-lg bg-gray-50 px-4 py-2 font-mono text-sm font-semibold text-gray-800">
+          <h2 className="mb-2 text-2xl font-bold text-[#2e261c]">Payment Failed</h2>
+          <p className="mb-1 text-sm text-[#7a6b52]">Order ID</p>
+          <p className="mb-8 rounded-xl bg-[#f0ebe4] px-4 py-2 font-mono text-sm font-semibold text-[#2e261c]">
             {order_id}
           </p>
-          <p className="mb-8 text-sm leading-relaxed text-gray-500">
+          <p className="mb-8 text-sm leading-relaxed text-[#7a6b52]">
             Your payment could not be processed or was cancelled. Please try again.
           </p>
           <Link
             href="/checkout"
-            className="w-full rounded-xl bg-gray-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-gray-800 active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+            className="w-full rounded-xl bg-[#2e261c] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#45392a] active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5c4f3a] focus-visible:ring-offset-2"
           >
             Try Again
           </Link>

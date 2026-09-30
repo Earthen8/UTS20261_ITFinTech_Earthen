@@ -60,21 +60,21 @@ export default function SelectItemPage() {
   return (
     <>
       <Head>
-        <title>Select Items | Payment Gateway</title>
-        <meta name="description" content="Select items and products" />
+        <title>Select Items | EKS Payment Gateway</title>
+        <meta name="description" content="Browse and select items from our menu" />
       </Head>
 
       <MobileFrame>
         <h1 className="sr-only">Select Items</h1>
 
-        {/* 1. Header: menu, logo, cart + search */}
-        <header className="sticky top-0 z-20 space-y-3.5 border-b border-gray-100 bg-white/95 px-5 pb-3.5 pt-4 backdrop-blur-md">
+        {/* 1. Header: logo, cart + search */}
+        <header className="sticky top-0 z-20 space-y-3.5 border-b border-[#e4ddd3] bg-[#faf8f5]/95 px-5 pb-3.5 pt-4 backdrop-blur-md sm:bg-white/95">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 aria-label="Open menu"
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-100 text-gray-600 transition hover:bg-gray-200 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+                className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#f0ebe4] text-[#5c4f3a] transition hover:bg-[#e4ddd3] hover:text-[#2e261c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6a4f]"
               >
                 <MenuIcon />
               </button>
@@ -84,18 +84,18 @@ export default function SelectItemPage() {
                   alt="EKS Logo"
                   className="h-8 w-auto object-contain"
                 />
-                <span className="text-lg font-bold tracking-tight text-black">EKS</span>
+                <span className="text-lg font-extrabold tracking-tight text-[#2e261c]">EKS</span>
               </div>
             </div>
 
             <Link
               href="/checkout"
               aria-label={`Go to cart, ${cartCount} item${cartCount === 1 ? '' : 's'}`}
-              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500"
+              className="relative flex h-10 w-10 items-center justify-center rounded-xl text-[#5c4f3a] transition hover:bg-[#f0ebe4] hover:text-[#2e261c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6a4f]"
             >
               <CartIcon className="h-6 w-6" />
               {cartCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-violet-600 px-1 text-[11px] font-bold text-white">
+                <span className="absolute -right-0.5 -top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2d6a4f] px-1 text-[11px] font-bold text-white">
                   {cartCount}
                 </span>
               )}
@@ -120,7 +120,7 @@ export default function SelectItemPage() {
             ))}
           </ul>
         ) : (
-          <p className="px-5 py-16 text-center text-sm text-gray-400">
+          <p className="px-5 py-16 text-center text-sm text-[#a0937f]">
             No products found. Try a different search or category.
           </p>
         )}

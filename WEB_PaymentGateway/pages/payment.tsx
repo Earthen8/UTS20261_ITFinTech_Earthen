@@ -4,6 +4,7 @@ import MobileFrame from '../components/layout/MobileFrame';
 import BackHeader from '../components/layout/BackHeader';
 import EmptyCart from '../components/ui/EmptyCart';
 import PriceRow from '../components/ui/PriceRow';
+import { LockIcon } from '../components/ui/Icons';
 import { useCart } from '../hooks/useCart';
 import { formatCurrency } from '../lib/format';
 import { calculateTotals, getShippingFee } from '../lib/pricing';
@@ -13,10 +14,10 @@ import {
   type ShippingAddress,
 } from '../lib/payment-service';
 
-const PAYMENT_METHODS: { value: PaymentMethod; label: string }[] = [
-  { value: 'card', label: 'Credit/Debit Card' },
-  { value: 'paypal', label: 'PayPal' },
-  { value: 'other', label: 'Other (e.g. E-Wallet, Bank Transfer)' },
+const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string; desc: string }[] = [
+  { value: 'card', label: 'Credit/Debit Card', icon: '💳', desc: 'Visa, Mastercard, JCB' },
+  { value: 'paypal', label: 'PayPal', icon: '🅿️', desc: 'Pay with your PayPal account' },
+  { value: 'other', label: 'E-Wallet / Transfer', icon: '📱', desc: 'GoPay, OVO, Bank Transfer' },
 ];
 
 type FieldErrors = Partial<Record<keyof ShippingAddress, string>>;
@@ -90,9 +91,9 @@ export default function PaymentPage() {
   };
 
   const inputClass = (hasError: boolean) =>
-    `w-full rounded-xl border bg-gray-50 px-3.5 py-2.5 text-sm text-gray-800 placeholder-gray-400 outline-none transition focus:bg-white focus:ring-2 ${hasError
+    `w-full rounded-xl border bg-[#f0ebe4]/40 px-3.5 py-2.5 text-sm text-[#2e261c] placeholder-[#a0937f] outline-none transition focus:bg-white focus:ring-2 ${hasError
       ? 'border-red-300 focus:border-red-400 focus:ring-red-100'
-      : 'border-gray-200 focus:border-violet-400 focus:ring-violet-100'
+      : 'border-[#e4ddd3] focus:border-[#2d6a4f] focus:ring-[#2d6a4f]/15'
     }`;
 
   const busy = status === 'submitting';
@@ -101,8 +102,8 @@ export default function PaymentPage() {
   return (
     <>
       <Head>
-        <title>Payment | Payment Gateway</title>
-        <meta name="description" content="Secure payment gateway" />
+        <title>Payment | EKS Payment Gateway</title>
+        <meta name="description" content="Complete your secure payment" />
       </Head>
 
       <MobileFrame>
@@ -115,13 +116,19 @@ export default function PaymentPage() {
           <EmptyCart />
         ) : (
           <form onSubmit={handleSubmit} noValidate className="flex flex-1 flex-col">
-            <div className="flex-1 space-y-6 px-5 py-5">
+            <div className="flex-1 space-y-5 px-5 py-5">
               {/* 2. Shipping address */}
-              <fieldset className="space-y-3 rounded-xl bg-gray-50 p-4" disabled={busy || done}>
-                <legend className="mb-1 px-0.5 text-sm font-semibold text-gray-800">Shipping Address</legend>
+              <fieldset
+                className="space-y-3 rounded-2xl border border-[#e4ddd3]/50 bg-[#f0ebe4]/30 p-4"
+                disabled={busy || done}
+              >
+                <legend className="mb-1 flex items-center gap-2 px-0.5 text-sm font-bold text-[#2e261c]">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#ecf5ee] text-xs">📍</span>
+                  Shipping Address
+                </legend>
 
                 <div>
-                  <label htmlFor="fullName" className="mb-1 block text-xs font-medium text-gray-600">
+                  <label htmlFor="fullName" className="mb-1 block text-xs font-medium text-[#7a6b52]">
                     Full Name
                   </label>
                   <input
@@ -141,7 +148,7 @@ export default function PaymentPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="address" className="mb-1 block text-xs font-medium text-gray-600">
+                  <label htmlFor="address" className="mb-1 block text-xs font-medium text-[#7a6b52]">
                     Address
                   </label>
                   <input
@@ -161,7 +168,7 @@ export default function PaymentPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="mb-1 block text-xs font-medium text-gray-600">
+                  <label htmlFor="phone" className="mb-1 block text-xs font-medium text-[#7a6b52]">
                     Phone Number
                   </label>
                   <input
@@ -181,32 +188,66 @@ export default function PaymentPage() {
                 </div>
               </fieldset>
 
-              {/* 3. Payment method */}
-              <fieldset className="rounded-xl bg-gray-50 p-4" disabled={busy || done}>
-                <legend className="mb-3 text-sm font-semibold text-gray-800">Payment Method</legend>
-                <div className="space-y-1">
-                  {PAYMENT_METHODS.map((option) => (
-                    <label
-                      key={option.value}
-                      className={`flex cursor-pointer items-start gap-3 rounded-xl px-2 py-2.5 text-sm transition-colors ${method === option.value ? 'bg-violet-50 text-violet-800' : 'text-gray-700 hover:bg-white'}`}
-                    >
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value={option.value}
-                        checked={method === option.value}
-                        onChange={() => setMethod(option.value)}
-                        className="mt-0.5 h-4 w-4 shrink-0 accent-violet-600"
-                      />
-                      <span>{option.label}</span>
-                    </label>
-                  ))}
+              {/* 3. Payment method — card-style selection */}
+              <fieldset
+                className="rounded-2xl border border-[#e4ddd3]/50 bg-[#f0ebe4]/30 p-4"
+                disabled={busy || done}
+              >
+                <legend className="mb-3 flex items-center gap-2 text-sm font-bold text-[#2e261c]">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#ecf5ee] text-xs">💰</span>
+                  Payment Method
+                </legend>
+                <div className="space-y-2">
+                  {PAYMENT_METHODS.map((option) => {
+                    const isSelected = method === option.value;
+                    return (
+                      <label
+                        key={option.value}
+                        className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-3 transition-all ${
+                          isSelected
+                            ? 'border-[#2d6a4f] bg-[#ecf5ee] shadow-sm'
+                            : 'border-transparent bg-white/60 hover:bg-white hover:border-[#e4ddd3]'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="paymentMethod"
+                          value={option.value}
+                          checked={isSelected}
+                          onChange={() => setMethod(option.value)}
+                          className="sr-only"
+                        />
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f0ebe4] text-lg">
+                          {option.icon}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-semibold text-[#2e261c]">{option.label}</p>
+                          <p className="text-xs text-[#7a6b52]">{option.desc}</p>
+                        </div>
+                        <div
+                          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition ${
+                            isSelected ? 'border-[#2d6a4f] bg-[#2d6a4f]' : 'border-[#c9bba6]'
+                          }`}
+                        >
+                          {isSelected && (
+                            <svg className="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                          )}
+                        </div>
+                      </label>
+                    );
+                  })}
                 </div>
               </fieldset>
 
               {/* 4. Order summary */}
-              <section aria-labelledby="order-summary-title" className="rounded-xl bg-gray-50 p-4">
-                <h2 id="order-summary-title" className="mb-3 text-sm font-semibold text-gray-800">
+              <section
+                aria-labelledby="order-summary-title"
+                className="rounded-2xl border border-[#e4ddd3]/50 bg-[#f0ebe4]/30 p-4"
+              >
+                <h2 id="order-summary-title" className="mb-3 flex items-center gap-2 text-sm font-bold text-[#2e261c]">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#ecf5ee] text-xs">🧾</span>
                   Order Summary
                 </h2>
                 <dl className="space-y-2">
@@ -223,20 +264,21 @@ export default function PaymentPage() {
             {/* 5. Action */}
             <div className="space-y-3 px-5 pb-6">
               {status === 'error' && (
-                <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+                <p role="alert" className="rounded-xl bg-red-50 px-3 py-2.5 text-sm text-red-700 border border-red-100">
                   Something went wrong while creating your payment. Please try again.
                 </p>
               )}
               {done && (
-                <p role="status" className="rounded-lg bg-green-50 px-3 py-2 text-sm text-green-800">
+                <p role="status" className="rounded-xl bg-[#ecf5ee] px-3 py-2.5 text-sm text-[#1b4332] border border-[#d4ead8]">
                   Order <span className="font-semibold">{reference}</span> confirmed. Waiting for payment.
                 </p>
               )}
               <button
                 type="submit"
                 disabled={busy || done}
-                className="w-full rounded-xl bg-violet-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1b4332] px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#1b4332]/20 transition hover:bg-[#2d6a4f] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6a4f] focus-visible:ring-offset-2"
               >
+                <LockIcon className="h-4 w-4" />
                 {busy ? 'Processing…' : done ? 'Order Confirmed' : 'Confirm & Pay'}
               </button>
             </div>

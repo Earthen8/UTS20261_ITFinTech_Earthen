@@ -1,18 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #f5f5f7;
-  --foreground: #1c1c1e;
+  --background: #faf8f5;
+  --foreground: #1a1a1a;
+  --earthy-50: #f0ebe4;
+  --earthy-100: #e4ddd3;
+  --earthy-200: #c9bba6;
+  --earthy-500: #7a6b52;
+  --earthy-600: #5c4f3a;
+  --earthy-700: #45392a;
+  --earthy-800: #2e261c;
+  --earthy-900: #1a1610;
+  --green-50: #ecf5ee;
+  --green-100: #d4ead8;
+  --green-500: #2d6a4f;
+  --green-600: #1b4332;
+  --green-700: #143328;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 body {
-  background: #ffffff;
+  background: #faf8f5;
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -20,6 +34,12 @@ body {
 
 @media (min-width: 640px) {
   body {
-    background: #f5f5f7;
+    background: #f0ebe4;
   }
+}
+
+/* Smooth scrollbar for product lists */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c9bba6 transparent;
 }

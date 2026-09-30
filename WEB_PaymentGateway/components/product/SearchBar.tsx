@@ -14,9 +14,9 @@ export default function SearchBar({ value, onChange }: SearchBarProps) {
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Search products…"
                 aria-label="Search products"
-                className="w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pl-4 pr-11 text-sm text-gray-800 placeholder-gray-400 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-2 focus:ring-violet-100"
+                className="w-full rounded-xl border border-[#e4ddd3] bg-[#f0ebe4]/50 py-2.5 pl-4 pr-11 text-sm text-[#2e261c] placeholder-[#a0937f] outline-none transition focus:border-[#2d6a4f] focus:bg-white focus:ring-2 focus:ring-[#2d6a4f]/20"
             />
-            <SearchIcon className="pointer-events-none absolute right-3.5 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-gray-400" />
+            <SearchIcon className="pointer-events-none absolute right-3.5 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-[#a0937f]" />
         </div>
     );
 }
