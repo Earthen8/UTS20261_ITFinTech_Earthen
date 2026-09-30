@@ -1,6 +1,6 @@
 import type { Totals } from './pricing';
 
-export type PaymentMethod = 'card' | 'paypal' | 'other';
+export type PaymentMethod = 'qris' | 'gopay' | 'shopeepay' | 'bca_va' | 'mandiri_va' | 'credit_card';
 
 export interface ShippingAddress {
     fullName: string;

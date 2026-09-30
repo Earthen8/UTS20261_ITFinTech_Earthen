@@ -15,9 +15,12 @@ import {
 } from '../lib/payment-service';
 
 const PAYMENT_METHODS: { value: PaymentMethod; label: string; icon: string; desc: string }[] = [
-  { value: 'card', label: 'Credit/Debit Card', icon: '💳', desc: 'Visa, Mastercard, JCB' },
-  { value: 'paypal', label: 'PayPal', icon: '🅿️', desc: 'Pay with your PayPal account' },
-  { value: 'other', label: 'E-Wallet / Transfer', icon: '📱', desc: 'GoPay, OVO, Bank Transfer' },
+  { value: 'qris', label: 'QRIS', icon: '📱', desc: 'Scan to pay with any app' },
+  { value: 'gopay', label: 'GoPay', icon: '🟢', desc: 'Pay with GoPay app' },
+  { value: 'shopeepay', label: 'ShopeePay', icon: '🟠', desc: 'Pay with ShopeePay app' },
+  { value: 'bca_va', label: 'BCA Virtual Account', icon: '🏦', desc: 'Transfer via BCA Mobile or ATM' },
+  { value: 'mandiri_va', label: 'Mandiri Virtual Account', icon: '🏦', desc: 'Transfer via Livin or ATM' },
+  { value: 'credit_card', label: 'Credit/Debit Card', icon: '💳', desc: 'Visa, Mastercard, JCB' },
 ];
 
 type FieldErrors = Partial<Record<keyof ShippingAddress, string>>;
@@ -38,7 +41,7 @@ export default function PaymentPage() {
 
   const [shipping, setShipping] = useState<ShippingAddress>({ fullName: '', address: '', phone: '' });
   const [errors, setErrors] = useState<FieldErrors>({});
-  const [method, setMethod] = useState<PaymentMethod>('card');
+  const [method, setMethod] = useState<PaymentMethod>('qris');
   const [status, setStatus] = useState<Status>('idle');
   const [reference, setReference] = useState('');
 
